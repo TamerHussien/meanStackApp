@@ -14,6 +14,10 @@ var router = express.Router();
 
 var path = require('path');
 
+var passport = require('passport');
+
+var social = require('./app/passport/passport')(app, passport);
+
 var appRoutes = require('./app/routes/api')(router);
 
 app.use(morgan('dev'));
