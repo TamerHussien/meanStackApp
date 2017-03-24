@@ -52,13 +52,12 @@ passport.deserializeUser(function(id, done) {
             
         });
         
-         done(null, profile);
   }
 ));
     
-    app.get('/auth/facebook/callback',passport.authenticate('facebook', {failureRedirect: '/login' }), function(req, res){
+    app.get('/auth/facebook/callback',passport.authenticate('facebook', {failureRedirect: '/facebookerror' }), function(req, res){
         
-        res.redirect('/facebook' + token);
+        res.redirect('/facebook/' + token);
     });
     
     app.get('/auth/facebook',passport.authenticate('facebook', { scope: 'email' }));

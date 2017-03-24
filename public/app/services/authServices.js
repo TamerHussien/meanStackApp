@@ -26,6 +26,12 @@ angular.module('authServices', [])
         
     };
     
+    authFactory.facebook = function(token){
+      
+        AuthToken.setToken(token);
+        
+    };
+    
     authFactory.getUser = function() {
         // Check first if user has a token
         if (AuthToken.getToken()) {
