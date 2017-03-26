@@ -1,4 +1,7 @@
-var FacebookStrategy = require('passport-facebook').Strategy;
+var FacebookStrategy = require('passport-facebook').Strategy,
+
+TwitterStrategy = require('passport-twitter').Strategy;
+
 
 var User = require('../models/user');
 
@@ -54,6 +57,29 @@ passport.deserializeUser(function(id, done) {
         
   }
 ));
+    
+
+passport.use(new TwitterStrategy({
+    consumerKey: 'DQW7tkg0PUiDqdj2aL6ToIwSl',
+    consumerSecret: 'TPkhHCXEh0X8efAaZrT6ePWSjnusLAbrCNKujm3mRTBxTXxsRx',
+    callbackURL: "http://localhost:8000/auth/twitter/callback",
+    serProfileURL: "https://api.twitter.com/1.1/account/verify_credentials.json?include_email=true"
+  },
+  function(token, tokenSecret, profile, done) {
+    console.log(profile);
+   /* User.findOrCreate(..., function(err, user) {
+      if (err) { return done(err); }
+      done(null, user);
+    });*/
+    done(null, profile);
+  }
+));
+    
+
+    app.get('/auth/twitter', passport.authenticate('twitter'));
+
+
+    app.get('/auth/twitter/callback',passport.authenticate('twitter', {failureRedirect: '/twittererror' }));
     
     app.get('/auth/facebook/callback',passport.authenticate('facebook', {failureRedirect: '/facebookerror' }), function(req, res){
         
