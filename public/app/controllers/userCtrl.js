@@ -54,7 +54,7 @@ angular.module('userControllers', ['userServices'])
     
     
 })
-
+ 
 .controller('twitterCtrl', function($routeParams, Auth, $location, $window){
     
     var app = this;

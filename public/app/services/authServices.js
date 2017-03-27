@@ -30,7 +30,7 @@ angular.module('authServices', [])
       
         AuthToken.setToken(token);
         
-    };
+    }; 
     
     
     

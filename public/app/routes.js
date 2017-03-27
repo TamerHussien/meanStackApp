@@ -45,7 +45,7 @@ angular.module('appRoutes', ['ngRoute'])
         controller: 'facebookCtrl',
         controllerAs: 'facebook'
        
-    })
+    }) 
     
     .when('/twitter/:token', {
         
