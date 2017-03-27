@@ -32,6 +32,8 @@ angular.module('authServices', [])
         
     };
     
+    
+    
     authFactory.getUser = function() {
         // Check first if user has a token
         if (AuthToken.getToken()) {

@@ -53,4 +53,23 @@ angular.module('userControllers', ['userServices'])
     }
     
     
+})
+
+.controller('twitterCtrl', function($routeParams, Auth, $location, $window){
+    
+    var app = this;
+    
+    if ($window.location.pathname == '/twittererror') {
+        
+    app.errorMsg = 'twitter account email cannot found in our database';
+
+    } else {
+        
+       
+        Auth.facebook($routeParams.token); 
+        
+        $location.path('/'); 
+    }
+    
+    
 });
