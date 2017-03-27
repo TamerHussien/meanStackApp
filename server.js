@@ -37,7 +37,7 @@ mongoose.connect('mongodb://localhost:27017/tutorial', function(err){
     } else {
         console.log('db is connected')
     }
-});
+}); 
 
 app.get('*', function(req, res){
     
