@@ -1,7 +1,8 @@
 var FacebookStrategy = require('passport-facebook').Strategy,
 
-TwitterStrategy = require('passport-twitter').Strategy;
-
+TwitterStrategy = require('passport-twitter').Strategy,
+    
+    GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 var User = require('../models/user');
 
@@ -84,6 +85,30 @@ passport.use(new TwitterStrategy({
   }
 ));
     
+passport.use(new GoogleStrategy({
+    clientID: '565383223207-eh8kpa6q36u3qmocon28egk41t63degj.apps.googleusercontent.com',
+    clientSecret: '_L8RqBAZxiVtIAtF1X9PaBtH',
+    callbackURL: "http://localhost:8000/auth/google/callback",
+    passReqToCallback   : true
+  },
+  function(accessToken, refreshToken, profile, done) {
+      
+        console.log(profile.emails[0].value);
+    
+    User.findOne({email: profile.emails[0].value}).select('username password email ').exec(function(err, user){
+           
+            if (err) done(err);
+            
+            if (user && user != null){
+                done(null, user);
+            } else {
+                
+                done(err);
+            }
+             
+        });
+  }
+));
 
     app.get('/auth/twitter', passport.authenticate('twitter'));
 
@@ -101,4 +126,11 @@ passport.use(new TwitterStrategy({
     app.get('/auth/facebook',passport.authenticate('facebook', { scope: 'email' }));
 
     return passport;
+    
+    app.get('/auth/google',passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login', 'profile', 'email'] }));
+            
+    app.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/googleerror' }),function(req, res) {
+    res.redirect('/google/' + token);
+  });
+
 }

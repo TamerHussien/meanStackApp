@@ -54,6 +54,13 @@ angular.module('appRoutes', ['ngRoute'])
         controllerAs: 'twitter'
        
     })
+    .when('/google/:token', {
+        
+        templateUrl: 'app/views/pages/users/social/social.html',
+        controller: 'twitterCtrl',
+        controllerAs: 'twitter'
+       
+    })
     
     .when('/facebookerror', {
         
@@ -68,6 +75,14 @@ angular.module('appRoutes', ['ngRoute'])
         templateUrl: 'app/views/pages/users/login.html',
         controller: 'twitterCtrl',
         controllerAs: 'twitter'
+       
+    })
+    
+    .when('/googlererror', {
+        
+        templateUrl: 'app/views/pages/users/login.html',
+        controller: 'googleCtrl',
+        controllerAs: 'google'
        
     })
     .otherwise({ redirectTo: '/' });

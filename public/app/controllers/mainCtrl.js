@@ -43,6 +43,14 @@ angular.module('mainController', ['authServices'])
         $window.location = $window.location.protocol + '//' + $window.location.host + '/auth/twitter';
     }
     
+    this.google = function() {
+        
+        //console.log($window.location.host);
+        //console.log($window.location.protocol);
+        
+        $window.location = $window.location.protocol + '//' + $window.location.host + '/auth/google';
+    }
+    
     
     this.doLogin = function(loginData){
       app.errorMsg = false;
