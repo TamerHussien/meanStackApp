@@ -88,14 +88,13 @@ passport.use(new TwitterStrategy({
 passport.use(new GoogleStrategy({
     clientID: '565383223207-eh8kpa6q36u3qmocon28egk41t63degj.apps.googleusercontent.com',
     clientSecret: '_L8RqBAZxiVtIAtF1X9PaBtH',
-    callbackURL: "http://localhost:8000/auth/google/callback",
-    passReqToCallback   : true
+    callbackURL: "http://localhost:8000/auth/google/callback"
   },
   function(accessToken, refreshToken, profile, done) {
       
         console.log(profile.emails[0].value);
     
-    User.findOne({email: profile.emails[0].value}).select('username password email ').exec(function(err, user){
+   User.findOne({email: profile.emails[0].value}).select('username password email ').exec(function(err, user){
            
             if (err) done(err);
             
@@ -125,12 +124,17 @@ passport.use(new GoogleStrategy({
     
     app.get('/auth/facebook',passport.authenticate('facebook', { scope: 'email' }));
 
-    return passport;
     
-    app.get('/auth/google',passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login', 'profile', 'email'] }));
+    
+    app.get('/auth/google', passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login', 'profile', 'email'] }));
             
-    app.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/googleerror' }),function(req, res) {
-    res.redirect('/google/' + token);
-  });
+   app.get('/auth/google/callback', passport.authenticate('google', { failureRedirect:'/googleerror'}),function(req, res) { 
+       
+       res.redirect('/google/' + token); 
+   });
 
+    return passport;
 }
+
+
+ 

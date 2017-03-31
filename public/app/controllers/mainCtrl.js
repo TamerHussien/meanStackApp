@@ -33,7 +33,7 @@ angular.module('mainController', ['authServices'])
         //console.log($window.location.protocol);
         
         $window.location = $window.location.protocol + '//' + $window.location.host + '/auth/facebook';
-    }
+    };
     
     this.twitter = function() {
         
@@ -41,7 +41,7 @@ angular.module('mainController', ['authServices'])
         //console.log($window.location.protocol);
         
         $window.location = $window.location.protocol + '//' + $window.location.host + '/auth/twitter';
-    }
+    };
     
     this.google = function() {
         
@@ -49,7 +49,7 @@ angular.module('mainController', ['authServices'])
         //console.log($window.location.protocol);
         
         $window.location = $window.location.protocol + '//' + $window.location.host + '/auth/google';
-    }
+    };
     
     
     this.doLogin = function(loginData){
